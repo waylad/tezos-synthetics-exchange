@@ -1,5 +1,5 @@
 {
-  "name": "drop.museum",
+  "name": "tezos-synthetics-exchange",
   "version": "1.0.0",
   "scripts": {
     "start": "lerna exec -- yarn run --parallel start",
