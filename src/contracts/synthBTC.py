@@ -1,27 +1,38 @@
 import smartpy as sp
-fa12 = sp.io.import_script_from_url("https://smartpy.io/templates/FA1.2.py")
 
-class Token(fa12.FA12):
-  pass
+FA12 = sp.io.import_script_from_url('https://smartpy.io/templates/FA1.2.py')
 
-@sp.add_test(name="Token")
+class SynthBTC(FA12.FA12):
+    pass
+
+# ################################ Test Scenarios #################################    
+@sp.add_test(name="fa12_token_test_1")
 def test():
-  admin = sp.address("tz1fwuPsmbphKGNtbsDk8xY4UbsAnHeskxC3")
-  scenario = sp.test_scenario()
-  token_metadata = {
-      "decimals": "6",
-      "name": "synthBTC",
-      "symbol": "sBTC",
-      "icon": 'https://smartpy.io/static/img/logo-only.svg'
-  }
-  contract_metadata = {
-      "" : "ipfs://QmaiAUj1FFNGYTu8rLBjc3eeN9cSKwaF8EGMBNDmhzPNFd",
-  }
-
-  token = Token(
-    admin,
-    config = fa12.FA12_config(support_upgradable_metadata=True),
-    token_metadata = token_metadata,
-    contract_metadata = contract_metadata
-  )
-  scenario += token
+    admin1 = sp.address("tz1fwuPsmbphKGNtbsDk8xY4UbsAnHeskxC3")
+    game1 = sp.test_account("game1")
+    mark = sp.test_account("mark")
+    elon = sp.test_account("elon")
+    
+    token_metadata = {
+        "name": "SynthBTC",
+        "symbol": "sETH",
+        "decimals": "6"
+    }
+    
+    sBTC = SynthBTC(
+        admin1, # Update the admin address before deployement to the chain. 
+        config = FA12.FA12_config(support_upgradable_metadata= True),
+        token_metadata = token_metadata,
+        contract_metadata = {
+            '': "ipfs://bafkreicysfopd2fnmytjgsagdk555mh6d2npfqrbtlbxfj7srwzayd2maq"
+        }
+    )
+    # IPFS Hash for contract_metadata: bafkreicysfopd2fnmytjgsagdk555mh6d2npfqrbtlbxfj7srwzayd2maq
+    scenario = sp.test_scenario()   
+    
+    scenario += sBTC
+    
+    sBTC.mint(sp.record(address = elon.address,value = sp.nat(100))).run(sender = admin1)
+    sBTC.mint(sp.record(address = mark.address,value = sp.nat(10))).run(sender = admin1)
+    sBTC.burn(sp.record(address = elon.address,value = sp.nat(10))).run(sender = admin1)
+    sBTC.transfer(sp.record(from_ = elon.address,to_ = mark.address,value = sp.nat(10))).run(sender=elon)
