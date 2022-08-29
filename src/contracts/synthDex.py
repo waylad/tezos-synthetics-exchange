@@ -21,9 +21,13 @@ class SynthDex(sp.Contract):
 
     @sp.entry_point
     def buySynthUsd(self):
-        # TODO: Get XTZ/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
-        # Assuming 2 USD
-        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) * 2)
+        # Get XTZ/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
+        xtzusd_price = sp.view("getPrice", self.data.harbinger_contract, 'XTZ-USD', t = sp.TRecord(lastUpdateTime = sp.TTimestamp, computedPrice = sp.TNat)).open_some("Invalid view")
+        sp.trace('xtzusd_price')
+        sp.trace(xtzusd_price.computedPrice)
+        # sp.verify(xtzusd_price.computedPrice > 0, "This is false: price > 0")
+
+        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) * xtzusd_price.computedPrice / 1000000)
         sp.trace('buySynthUsd token_amount')
         sp.trace(token_amount.value)
 
@@ -45,9 +49,11 @@ class SynthDex(sp.Contract):
 
     @sp.entry_point
     def buySynthEth(self):
-        # TODO: Get XTZ/USD and ETH/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
-        # Assuming 2 USD and 1500 USD respectively
-        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) * 2 / 1500)
+        # Get XTZ/USD and ETH/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
+        xtzusd_price = sp.view("getPrice", self.data.harbinger_contract, 'XTZ-USD', t = sp.TRecord(lastUpdateTime = sp.TTimestamp, computedPrice = sp.TNat)).open_some("Invalid view")
+        ethusd_price = sp.view("getPrice", self.data.harbinger_contract, 'ETH-USD', t = sp.TRecord(lastUpdateTime = sp.TTimestamp, computedPrice = sp.TNat)).open_some("Invalid view")
+
+        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) * xtzusd_price.computedPrice / ethusd_price.computedPrice)
         sp.trace('buySynthEth token_amount')
         sp.trace(token_amount.value)
 
@@ -69,9 +75,11 @@ class SynthDex(sp.Contract):
 
     @sp.entry_point
     def buySynthBtc(self):
-        # TODO: Get XTZ/USD and BTC/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
-        # Assuming 2 USD and 20000 USD respectively
-        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) * 2 / 20000)
+        # Get XTZ/USD and BTC/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
+        xtzusd_price = sp.view("getPrice", self.data.harbinger_contract, 'XTZ-USD', t = sp.TRecord(lastUpdateTime = sp.TTimestamp, computedPrice = sp.TNat)).open_some("Invalid view")
+        btcusd_price = sp.view("getPrice", self.data.harbinger_contract, 'BTC-USD', t = sp.TRecord(lastUpdateTime = sp.TTimestamp, computedPrice = sp.TNat)).open_some("Invalid view")
+
+        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) * xtzusd_price.computedPrice / btcusd_price.computedPrice)
         sp.trace('buySynthBtc token_amount')
         sp.trace(token_amount.value)
 

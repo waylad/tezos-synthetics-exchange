@@ -1,6 +1,6 @@
 # tezos-synthetics-exchange
 
-![](https://i.ibb.co/fkXvnnX/Screenshot-2022-08-29-at-17-46-21.png)
+![](https://i.ibb.co/4NDZkbq/Screenshot-2022-08-29-at-22-26-46.png)
 
 ## Live Demo (Ghostnet): https://tezos-synthetics-exchange.pages.dev/
 
@@ -12,7 +12,7 @@ Tezos-synthetics-exchange is a decentralized, self-governing, non-custodial plat
 
 Synthetic assets are financial derivatives that don’t give us the right to deliver or own the underlying asset but allow us to take advantage of its price.
 
-What are the differences between synthetic and wrapped assets?
+### What are the differences between synthetic and wrapped assets?
 
 Wrapped assets are backed by those underlying them, which are stored on other blockchains. For example, to issue tzETH on Tezos, you need to lock ETH on the Ethereum blockchain. In turn, synthetic assets can be collateralized by any coin as long as the cost of the collateral is higher than the cost of the issued tokens by an acceptable proportion. A detailed overview of synthetic assets is available on our blog.
 
@@ -28,9 +28,19 @@ Tezos-synthetics-exchange uses the [Harbinger Ghostnet Normalizer Contract](http
 
 ### Synthetic assets available for minting
 
-- sUSD — a synthetic asset pegged to the value of USD, available at `KT1BbKvF35VRn9WaQNdAjC98ENSEcX1HSdwz`
-- sBTC — a synthetic asset pegged to the value of BTC, available at `KT1Sxot6LZJsm2fTG3N82SPXfQxbuNr1NRr6`
-- sETH — a synthetic asset pegged to the value of ETH, available at `KT1GH8gbE7XVp2bmM4k97KmiTQidddT1MgsQ`
+- sUSD — a synthetic asset pegged to the value of USD, available at [KT1BbKvF35VRn9WaQNdAjC98ENSEcX1HSdwz](https://better-call.dev/ghostnet/KT1BbKvF35VRn9WaQNdAjC98ENSEcX1HSdwz)
+- sBTC — a synthetic asset pegged to the value of BTC, available at [KT1Sxot6LZJsm2fTG3N82SPXfQxbuNr1NRr6](https://better-call.dev/ghostnet/KT1Sxot6LZJsm2fTG3N82SPXfQxbuNr1NRr6)
+- sETH — a synthetic asset pegged to the value of ETH, available at [KT1GH8gbE7XVp2bmM4k97KmiTQidddT1MgsQ](https://better-call.dev/ghostnet/KT1GH8gbE7XVp2bmM4k97KmiTQidddT1MgsQ)
+
+The exchange is deployed to [KT1G5B1SuECufhToikBJztgJdgQup2xQrzxE](https://better-call.dev/ghostnet/KT1G5B1SuECufhToikBJztgJdgQup2xQrzxE)
+
+### Backlog for reaching 'completion'
+
+- [Smart Contract] Complete harbinger integration
+- [Smart Contract] Add more Synths
+- [Smart Contract] Implement asset overcollateralization and CDP liquidation
+- [Frontend] Add history graphs
+- [Frontend] Implement UI for asset overcollateralization and CDP liquidation
 
 ### Smart contracts
 
