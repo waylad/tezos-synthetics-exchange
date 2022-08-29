@@ -4,7 +4,7 @@
 
 ## Live Demo (Ghostnet): https://tezos-synthetics-exchange.pages.dev/
 
-## Demo Video: Uploading now....
+## Demo Video: https://youtu.be/oGK_cAy6z7Q
 
 ## About Tezos-synthetics-exchange
 
