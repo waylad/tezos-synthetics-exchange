@@ -14,7 +14,7 @@ Synthetic assets are financial derivatives that don’t give us the right to del
 
 ### What are the differences between synthetic and wrapped assets?
 
-Wrapped assets are backed by those underlying them, which are stored on other blockchains. For example, to issue tzETH on Tezos, you need to lock ETH on the Ethereum blockchain. In turn, synthetic assets can be collateralized by any coin as long as the cost of the collateral is higher than the cost of the issued tokens by an acceptable proportion. A detailed overview of synthetic assets is available on our blog.
+Wrapped assets are backed by those underlying them, which are stored on other blockchains. For example, to issue tzETH on Tezos, you need to lock ETH on the Ethereum blockchain. In turn, synthetic assets can be collateralized by any coin as long as the cost of the collateral is higher than the cost of the issued tokens by an acceptable proportion.
 
 Tezos-synthetics-exchange can issue synthetic dollars (sUSD) and cryptocurrencies from other blockchains (sETH and sBTC).
 
