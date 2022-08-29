@@ -70,3 +70,52 @@ export const transaction = (method: string, amount: number) => async (dispatch: 
     })
   }
 }
+
+export const GET_PRICES_REQUEST = 'GET_PRICES_REQUEST'
+export const GET_PRICES_RESULT = 'GET_PRICES_RESULT'
+export const GET_PRICES_ERROR = 'GET_PRICES_ERROR'
+export const getPrices = () => async (dispatch: any, getState: any) => {
+  const state: State = getState()
+  const harbingerAddress = 'KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX'
+
+  if (!state.wallet.tezos) {
+    dispatch(showToaster(ERROR, 'Please connect your wallet', 'Please return to homepage'))
+    return
+  }
+
+  if (!state.wallet.accountPkh) {
+    dispatch(showToaster(ERROR, 'Please connect your wallet', 'Please return to homepage'))
+    return
+  }
+
+  try {
+    dispatch({
+      type: GET_PRICES_REQUEST,
+    })
+
+    const contract = await state.wallet.tezos?.wallet.at(harbingerAddress)
+
+    const storage = await (contract as any).storage()
+    const XTZUSDobject = await storage['assetMap'].get('XTZ-USD')
+    const BTCUSDobject = await storage['assetMap'].get('BTC-USD')
+    const ETHUSDobject = await storage['assetMap'].get('ETH-USD')
+    const prices = {
+      XTZUSD: XTZUSDobject.computedPrice.toNumber() / 1000000,
+      BTCUSD: BTCUSDobject.computedPrice.toNumber() / 1000000,
+      ETHUSD: ETHUSDobject.computedPrice.toNumber() / 1000000,
+    }
+    console.log(prices)
+
+    dispatch({
+      type: GET_PRICES_RESULT,
+      prices,
+    })
+  } catch (error: any) {
+    console.error(error)
+    dispatch(showToaster(ERROR, 'Error', error.message))
+    dispatch({
+      type: GET_PRICES_ERROR,
+      error,
+    })
+  }
+}

@@ -9,9 +9,10 @@ type MintViewProps = {
   connectCallback: () => void
   loading: boolean
   accountPkh?: string
+  prices?: any
 }
 
-export const MintView = ({ transactionCallback, connectCallback, loading, accountPkh }: MintViewProps) => {
+export const MintView = ({ transactionCallback, connectCallback, loading, accountPkh, prices }: MintViewProps) => {
   const [amounts, setAmounts] = useState({
     buySynthUsd: '',
     sellSynthUsd: '',
@@ -45,7 +46,7 @@ export const MintView = ({ transactionCallback, connectCallback, loading, accoun
                   Buy sUSD
                 </Button>
               </div>
-              <MintPrice>1 sUSD = 2 XTZ</MintPrice>
+              <MintPrice>1 sUSD = {prices.XTZUSD} XTZ</MintPrice>
               <div>
                 <Input
                   value={amounts.sellSynthUsd}
@@ -86,7 +87,10 @@ export const MintView = ({ transactionCallback, connectCallback, loading, accoun
                   Buy sETH
                 </Button>
               </div>
-              <MintPrice>1 sETH = 750 XTZ</MintPrice>
+              <MintPrice>
+                1 sETH = {prices.ETHUSD} USD
+                <br />1 sETH = {prices.ETHUSD / prices.XTZUSD} XTZ
+              </MintPrice>
               <div>
                 <Input
                   value={amounts.sellSynthEth}
@@ -127,7 +131,10 @@ export const MintView = ({ transactionCallback, connectCallback, loading, accoun
                   Buy sBTC
                 </Button>
               </div>
-              <MintPrice>1 sBTC = 10,000 XTZ</MintPrice>
+              <MintPrice>
+                1 sBTC = {prices.BTCUSD} USD
+                <br />1 sBTC = {prices.BTCUSD / prices.XTZUSD} XTZ
+              </MintPrice>
               <div>
                 <Input
                   value={amounts.sellSynthBtc}
