@@ -10,9 +10,9 @@ class SynthDex(sp.Contract):
         self.init(administrator = params.administrator,
                 matadata = params.metadata,
                 ledger = sp.big_map(l = {}, tkey = sp.TAddress, tvalue = sp.TRecord(token_address = sp.TMutez, token_amount = sp.TNat)),
-                sUSD_contract = sp.address('KT1RLQTVsdCP2f4gz9hfi88yuEEcx4ohRmxX'),
-                sBTC_contract = sp.address('KT1H2Ai3Y9LCZcRa64kAJLGrxR2jDrPNoi1g'),
-                sETH_contract = sp.address('KT1H2Ai3Y9LCZcRa64kAJLGrxR2jDrPNoi1g'),
+                sUSD_contract = sp.address('KT1BbKvF35VRn9WaQNdAjC98ENSEcX1HSdwz'),
+                sBTC_contract = sp.address('KT1Sxot6LZJsm2fTG3N82SPXfQxbuNr1NRr6'),
+                sETH_contract = sp.address('KT1GH8gbE7XVp2bmM4k97KmiTQidddT1MgsQ'),
                 harbinger_contract = sp.address('KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX')
             )
 

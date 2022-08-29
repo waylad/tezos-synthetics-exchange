@@ -14,7 +14,7 @@ export const MintView = ({ mintCallback, connectCallback, loading, accountPkh }:
       {accountPkh ? (
         <button onClick={() => mintCallback()}>Mint sUSD</button>
       ) : (
-        <button onClick={() => connectCallback()}>Connect Wallet</button>
+        <button onClick={() => connectCallback()}>Connect Temple Wallet (Ghostnet)</button>
       )}
     </MintStyled>
   )
