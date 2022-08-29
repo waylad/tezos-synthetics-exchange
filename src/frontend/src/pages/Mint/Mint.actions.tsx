@@ -44,12 +44,12 @@ export const transaction = (method: string, amount: number) => async (dispatch: 
     const contract = await state.wallet.tezos?.wallet.at(dexAddress)
     let transactionTx
 
-    if (method === 'buySynthUsd') transactionTx = await contract.methods.buySynthUsd().send()
-    if (method === 'sellSynthUsd') transactionTx = await contract.methods.sellSynthUsd(amount).send()
-    if (method === 'buySynthEth') transactionTx = await contract.methods.buySynthEth().send()
-    if (method === 'sellSynthEth') transactionTx = await contract.methods.sellSynthEth(amount).send()
-    if (method === 'buySynthBtc') transactionTx = await contract.methods.buySynthBtc().send()
-    if (method === 'sellSynthBtc') transactionTx = await contract.methods.sellSynthBtc(amount).send()
+    if (method === 'buySynthUsd') transactionTx = await contract.methods.buySynthUsd().send({ amount })
+    if (method === 'sellSynthUsd') transactionTx = await contract.methods.sellSynthUsd(amount * 1000000).send()
+    if (method === 'buySynthEth') transactionTx = await contract.methods.buySynthEth().send({ amount })
+    if (method === 'sellSynthEth') transactionTx = await contract.methods.sellSynthEth(amount * 1000000).send()
+    if (method === 'buySynthBtc') transactionTx = await contract.methods.buySynthBtc().send({ amount })
+    if (method === 'sellSynthBtc') transactionTx = await contract.methods.sellSynthBtc(amount * 1000000).send()
 
     dispatch(showToaster(SUCCESS, 'Executing order...', 'Please wait 30s'))
     const transactionDone = transactionTx && (await transactionTx.confirmation())

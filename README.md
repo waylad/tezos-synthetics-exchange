@@ -28,9 +28,9 @@ Tezos-synthetics-exchange uses the [Harbinger Ghostnet Normalizer Contract](http
 
 ### Synthetic assets available for minting
 
-- sUSD — an algorithmic Stable Token pegged to the value of USD and collateralized in TEZ.
-- sBTC — an algorithmic Stable Token pegged to the value of BTC and collateralized in TEZ.
-- sETH — an algorithmic Stable Token pegged to the value of ETH and collateralized in TEZ.
+- sUSD — a synthetic asset pegged to the value of USD.
+- sBTC — a synthetic asset pegged to the value of BTC.
+- sETH — a synthetic asset pegged to the value of ETH.
 
 ### Smart contracts
 
