@@ -23,7 +23,7 @@ class SynthDex(sp.Contract):
     def buySynthUsd(self):
         # TODO: Get XTZ/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
         # Assuming 2 USD
-        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) / 2)
+        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) * 2)
         sp.trace('buySynthUsd token_amount')
         sp.trace(token_amount.value)
 
@@ -38,7 +38,7 @@ class SynthDex(sp.Contract):
         dataToBeSent = sp.record(address = sp.sender, amount = amount)
         sp.transfer(dataToBeSent, sp.mutez(0), contractParams)
 
-        xtz_amount = sp.local( 'xtz_amount', amount * 2)
+        xtz_amount = sp.local( 'xtz_amount', amount / 2)
         sp.trace('sellSynthUsd xtz_amount')
         sp.trace(xtz_amount.value)
         sp.send(sp.sender, sp.utils.nat_to_mutez(xtz_amount.value))
@@ -46,8 +46,8 @@ class SynthDex(sp.Contract):
     @sp.entry_point
     def buySynthEth(self):
         # TODO: Get XTZ/USD and ETH/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
-        # Assuming 1500 USD
-        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) / 1500)
+        # Assuming 2 USD and 1500 USD respectively
+        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) * 2 / 1500)
         sp.trace('buySynthEth token_amount')
         sp.trace(token_amount.value)
 
@@ -62,7 +62,7 @@ class SynthDex(sp.Contract):
         dataToBeSent = sp.record(address = sp.sender, amount = amount)
         sp.transfer(dataToBeSent, sp.mutez(0), contractParams)
 
-        xtz_amount = sp.local( 'xtz_amount', amount * 1400)
+        xtz_amount = sp.local( 'xtz_amount', amount / 2 * 1500)
         sp.trace('sellSynthEth xtz_amount')
         sp.trace(xtz_amount.value)
         sp.send(sp.sender, sp.utils.nat_to_mutez(xtz_amount.value))
@@ -70,8 +70,8 @@ class SynthDex(sp.Contract):
     @sp.entry_point
     def buySynthBtc(self):
         # TODO: Get XTZ/USD and BTC/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
-        # Assuming 20000 USD
-        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) / 20000)
+        # Assuming 2 USD and 20000 USD respectively
+        token_amount = sp.local( 'token_amount', sp.utils.mutez_to_nat(sp.amount) * 2 / 20000)
         sp.trace('buySynthBtc token_amount')
         sp.trace(token_amount.value)
 
@@ -86,7 +86,7 @@ class SynthDex(sp.Contract):
         dataToBeSent = sp.record(address = sp.sender, amount = amount)
         sp.transfer(dataToBeSent, sp.mutez(0), contractParams)
 
-        xtz_amount = sp.local( 'xtz_amount', amount * 19000)
+        xtz_amount = sp.local( 'xtz_amount', amount * 20000 / 2)
         sp.trace('sellSynthBtc xtz_amount')
         sp.trace(xtz_amount.value)
         sp.send(sp.sender, sp.utils.nat_to_mutez(xtz_amount.value))
@@ -113,13 +113,13 @@ def test():
     sc += controller
 
     sc.h1("Buy/Sell sUSD")
-    sc += controller.buySynthUsd().run(sender = elon.address, amount = sp.mutez(7000000))
-    sc += controller.sellSynthUsd(1).run(sender = elon.address)    
+    sc += controller.buySynthUsd().run(sender = elon.address, amount = sp.mutez(7 * 1000000))
+    sc += controller.sellSynthUsd(14 * 1000000).run(sender = elon.address)    
 
-    # sc.h1("Buy/Sell sETH")
-    # sc += controller.buySynthEth().run(sender = elon.address, amount = sp.mutez(7000000))
-    # sc += controller.sellSynthEth(1).run(sender = elon.address)    
+    sc.h1("Buy/Sell sETH")
+    sc += controller.buySynthEth().run(sender = elon.address, amount = sp.mutez(7 * 1000000))
+    sc += controller.sellSynthEth(9300).run(sender = elon.address)    
 
-    # sc.h1("Buy/Sell sBtc")
-    # sc += controller.buySynthBtc().run(sender = elon.address, amount = sp.mutez(7000000))
-    # sc += controller.sellSynthBtc(1).run(sender = elon.address)    
+    sc.h1("Buy/Sell sBtc")
+    sc += controller.buySynthBtc().run(sender = elon.address, amount = sp.mutez(7 * 1000000))
+    sc += controller.sellSynthBtc(700).run(sender = elon.address)    
