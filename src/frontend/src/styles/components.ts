@@ -9,7 +9,7 @@ export const Ellipsis = styled.div`
 `
 
 export const CardPage = styled.div`
-  width: 400px;
+  width: 800px;
   margin: 100px auto 20px auto;
   max-width: 90vw;
   min-height: 100vh;

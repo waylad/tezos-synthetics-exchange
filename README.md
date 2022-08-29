@@ -1,5 +1,7 @@
 # tezos-synthetics-exchange
 
+![](https://i.ibb.co/fkXvnnX/Screenshot-2022-08-29-at-17-46-21.png)
+
 ## Live Demo (Ghostnet): https://tezos-synthetics-exchange.pages.dev/
 
 ## Demo Video: Uploading now....

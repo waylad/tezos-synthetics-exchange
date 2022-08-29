@@ -2,7 +2,7 @@ import { connect } from 'app/App.components/Menu/Menu.actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { State } from 'reducers'
-import { mint } from './Mint.actions'
+import { transaction } from './Mint.actions'
 import { MintView } from './Mint.view'
 
 export const Mint = () => {
@@ -10,13 +10,13 @@ export const Mint = () => {
   const loading = useSelector((state: State) => state.loading)
   const { wallet, ready, tezos, accountPkh } = useSelector((state: State) => state.wallet)
 
-  const mintCallback = () => {
-    dispatch(mint(1))
+  const transactionCallback = (method: string, amount: number) => {
+    dispatch(transaction(method, amount))
   }
 
   const handleConnect = () => {
     dispatch(connect({ forcePermission: false }))
   }
 
-  return <MintView mintCallback={mintCallback} connectCallback={handleConnect} loading={loading} accountPkh={accountPkh} />
+  return <MintView transactionCallback={transactionCallback} connectCallback={handleConnect} loading={loading} accountPkh={accountPkh} />
 }

@@ -9,10 +9,10 @@ const Tezos = new TezosToolkit('https://ghostnet.tezos.marigold.dev')
 //@ts-ignore
 Tezos.addExtension(new Tzip12Module())
 
-export const MINT_REQUEST = 'MINT_REQUEST'
-export const MINT_RESULT = 'MINT_RESULT'
-export const MINT_ERROR = 'MINT_ERROR'
-export const mint = (amount: number) => async (dispatch: any, getState: any) => {
+export const TRANSACTION_REQUEST = 'TRANSACTION_REQUEST'
+export const TRANSACTION_RESULT = 'TRANSACTION_RESULT'
+export const TRANSACTION_ERROR = 'TRANSACTION_ERROR'
+export const transaction = (method: string, amount: number) => async (dispatch: any, getState: any) => {
   const state: State = getState()
   const dexAddress = 'KT1G5B1SuECufhToikBJztgJdgQup2xQrzxE'
 
@@ -38,27 +38,34 @@ export const mint = (amount: number) => async (dispatch: any, getState: any) => 
 
   try {
     dispatch({
-      type: MINT_REQUEST,
+      type: TRANSACTION_REQUEST,
     })
 
     const contract = await state.wallet.tezos?.wallet.at(dexAddress)
-    const mintTransaction = await contract.methods.buySynthUsd(amount).send()
-    dispatch(showToaster(SUCCESS, 'Buying sUSD...', 'Please wait 30s'))
+    let transactionTx
 
-    const mintDone = await mintTransaction.confirmation()
-    console.log('done', mintDone)
+    if (method === 'buySynthUsd') transactionTx = await contract.methods.buySynthUsd().send()
+    if (method === 'sellSynthUsd') transactionTx = await contract.methods.sellSynthUsd(amount).send()
+    if (method === 'buySynthEth') transactionTx = await contract.methods.buySynthEth().send()
+    if (method === 'sellSynthEth') transactionTx = await contract.methods.sellSynthEth(amount).send()
+    if (method === 'buySynthBtc') transactionTx = await contract.methods.buySynthBtc().send()
+    if (method === 'sellSynthBtc') transactionTx = await contract.methods.sellSynthBtc(amount).send()
 
-    dispatch(showToaster(SUCCESS, 'sUSD sent to your wallet', 'Enjoy!'))
+    dispatch(showToaster(SUCCESS, 'Executing order...', 'Please wait 30s'))
+    const transactionDone = transactionTx && (await transactionTx.confirmation())
+    console.log('done', transactionDone)
+
+    dispatch(showToaster(SUCCESS, 'Tokens sent to your wallet', 'Enjoy!'))
 
     dispatch({
-      type: MINT_RESULT,
-      mintConfirmation: mintDone,
+      type: TRANSACTION_RESULT,
+      transactionConfirmation: transactionDone,
     })
   } catch (error: any) {
     console.error(error)
     dispatch(showToaster(ERROR, 'Error', error.message))
     dispatch({
-      type: MINT_ERROR,
+      type: TRANSACTION_ERROR,
       error,
     })
   }

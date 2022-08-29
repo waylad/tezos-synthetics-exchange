@@ -124,7 +124,7 @@ class FA12_core(sp.Contract, FA12_common):
     def is_administrator(self, sender):
         return sp.bool(False)
 
-class FA12_mint_burn(FA12_core):
+class FA12_TRANSACTION_burn(FA12_core):
     @sp.entry_point
     def mint(self, params):
         sp.set_type(params, sp.TRecord(address = sp.TAddress, value = sp.TNat))
@@ -251,7 +251,7 @@ class FA12_contract_metadata(FA12_core):
             self.update_metadata = sp.entry_point(update_metadata)
 
 class FA12(
-    FA12_mint_burn,
+    FA12_TRANSACTION_burn,
     FA12_administrator,
     FA12_pause,
     FA12_token_metadata,

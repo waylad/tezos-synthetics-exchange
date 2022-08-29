@@ -1,4 +1,4 @@
-import { MINT_REQUEST, MINT_RESULT, MINT_ERROR } from 'pages/Mint/Mint.actions'
+import { TRANSACTION_REQUEST, TRANSACTION_RESULT, TRANSACTION_ERROR } from 'pages/Mint/Mint.actions'
 
 export interface ContractState {
   mintConfirmation?: number
@@ -12,19 +12,19 @@ const contractDefaultState: ContractState = {
 
 export function contract(state = contractDefaultState, action: any): ContractState {
   switch (action.type) {
-    case MINT_REQUEST:
+    case TRANSACTION_REQUEST:
       return {
         ...state,
         mintConfirmation: undefined,
         error: undefined,
       }
-    case MINT_RESULT:
+    case TRANSACTION_RESULT:
       return {
         ...state,
         mintConfirmation: action.mintConfirmation,
         error: undefined,
       }
-    case MINT_ERROR:
+    case TRANSACTION_ERROR:
       return {
         ...state,
         mintConfirmation: undefined,

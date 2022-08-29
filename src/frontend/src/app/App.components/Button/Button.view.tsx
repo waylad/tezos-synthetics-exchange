@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { ButtonLoading, ButtonStyled } from './Button.style'
 
 interface ButtonProps {
-  appearance?: 'primary' | 'secondary' | 'tertiary'
+  appearance?: 'primary' | 'secondary' | 'tertiary' | 'up' | 'down'
   icon?: string
   type?: 'button' | 'submit' | 'reset'
   children: ReactNode

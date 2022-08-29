@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/macro'
 
-import { backgroundColor, gradColor, primaryColor, textColor } from '../../../styles'
+import { backgroundColor, downColor, gradColor, primaryColor, textColor, upColor } from '../../../styles'
 
 export const ButtonStyled = styled.button<{ appearance: string }>`
   ${(props) => {
@@ -18,6 +18,14 @@ export const ButtonStyled = styled.button<{ appearance: string }>`
         break
       case 'tertiary':
         elementBackgroundColor = backgroundColor
+        elementTextColor = textColor
+        break
+      case 'up':
+        elementBackgroundColor = upColor
+        elementTextColor = textColor
+        break
+      case 'down':
+        elementBackgroundColor = downColor
         elementTextColor = textColor
         break
       default:
