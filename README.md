@@ -1,10 +1,10 @@
 # tezos-synthetics-exchange
 
-## Live Demo:
+## Live Demo (Ghostnet): https://tezos-synthetics-exchange.pages.dev/
 
 ## Demo Video: Uploading now....
 
-## About tezos-synthetics-exchange
+## About Tezos-synthetics-exchange
 
 Tezos-synthetics-exchange is a decentralized, self-governing, non-custodial platform for issuing synthetic assets on the Tezos blockchain.
 
@@ -26,9 +26,9 @@ Tezos-synthetics-exchange uses the [Harbinger Ghostnet Normalizer Contract](http
 
 ### Synthetic assets available for minting
 
-sUSD — an algorithmic Stable Token pegged to the value of USD and collateralized in TEZ.
-sBTC — an algorithmic Stable Token pegged to the value of BTC and collateralized in TEZ.
-sETH — an algorithmic Stable Token pegged to the value of ETH and collateralized in TEZ.
+- sUSD — an algorithmic Stable Token pegged to the value of USD and collateralized in TEZ.
+- sBTC — an algorithmic Stable Token pegged to the value of BTC and collateralized in TEZ.
+- sETH — an algorithmic Stable Token pegged to the value of ETH and collateralized in TEZ.
 
 ### Smart contracts
 

@@ -14,7 +14,7 @@ export const MINT_RESULT = 'MINT_RESULT'
 export const MINT_ERROR = 'MINT_ERROR'
 export const mint = (amount: number) => async (dispatch: any, getState: any) => {
   const state: State = getState()
-  const dexAddress = 'KT1SqhRncvYBpoz9nurDqtCEM6qd8Rgq6NMn'
+  const dexAddress = 'KT1Egsnqn2Ytctukjzb8bQi44EaeHrTfHFdn'
 
   if (!state.wallet.tezos) {
     dispatch(showToaster(ERROR, 'Please connect your wallet', 'Please return to homepage'))

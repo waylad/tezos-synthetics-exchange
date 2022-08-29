@@ -10,7 +10,7 @@ class SynthDex(sp.Contract):
         self.init(administrator = params.administrator,
                 matadata = params.metadata,
                 ledger = sp.big_map(l = {}, tkey = sp.TAddress, tvalue = sp.TRecord(token_address = sp.TMutez, token_amount = sp.TNat)),
-                sUSD_contract = sp.address('KT1H2Ai3Y9LCZcRa64kAJLGrxR2jDrPNoi1g'),
+                sUSD_contract = sp.address('KT1RLQTVsdCP2f4gz9hfi88yuEEcx4ohRmxX'),
                 sBTC_contract = sp.address('KT1H2Ai3Y9LCZcRa64kAJLGrxR2jDrPNoi1g'),
                 sETH_contract = sp.address('KT1H2Ai3Y9LCZcRa64kAJLGrxR2jDrPNoi1g'),
                 harbinger_contract = sp.address('KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX')
@@ -21,6 +21,9 @@ class SynthDex(sp.Contract):
 
     @sp.entry_point
     def buySynthUsd(self, amount):
+
+        # TODO: Get XTZ/USD price from Harbinger https://better-call.dev/ghostnet/KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX/storage/big_map/25877/keys
+        
         contractParams = sp.contract(sp.TRecord(address = sp.TAddress, amount = sp.TNat), self.data.sUSD_contract ,entry_point="mint").open_some()
         dataToBeSent = sp.record(address = sp.sender, amount = amount)
         sp.transfer(dataToBeSent, sp.mutez(0), contractParams)
